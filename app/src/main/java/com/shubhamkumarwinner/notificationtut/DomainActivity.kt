@@ -21,19 +21,5 @@ class DomainActivity : AppCompatActivity() {
         val binding = ActivityDomainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.textView.text = getMessageText(intent).toString()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            notificationManager.cancelNotifications()
-
-            notificationManager.sendNotification("Replied", getMessageText(intent).toString(), this)
-        }
-    }
-
-    private fun getMessageText(intent: Intent): CharSequence? {
-        return RemoteInput.getResultsFromIntent(intent)?.getCharSequence(KEY_TEXT_REPLY)
     }
 }
