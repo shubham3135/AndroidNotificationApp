@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.channel_name),
             CHANNEL_ID,
             getString(R.string.channel_description),
-            NotificationManager.IMPORTANCE_HIGH
+            //change importance to low for progress bar
+            NotificationManager.IMPORTANCE_LOW
         )
         binding.showNotification.setOnClickListener {
             notificationManager.sendNotification(

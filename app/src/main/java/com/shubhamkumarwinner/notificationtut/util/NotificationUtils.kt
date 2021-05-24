@@ -9,11 +9,16 @@ import androidx.core.app.RemoteInput
 import com.shubhamkumarwinner.notificationtut.DomainActivity
 import com.shubhamkumarwinner.notificationtut.MainActivity
 import com.shubhamkumarwinner.notificationtut.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlin.concurrent.thread
 
 
 const val CHANNEL_ID = "myChannel"
 private const val NOTIFICATION_ID = 0
 const val KEY_TEXT_REPLY = "key_text_reply"
+val PROGRESS_MAX = 100
+val PROGRESS_CURRENT = 0
 
 fun NotificationManager.sendNotification(title: String, messageBody: String, applicationContext: Context){
     //for tap option
@@ -49,14 +54,22 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setSmallIcon(R.drawable.ic_electric_bike)
         .setContentTitle(title)
         .setContentText(messageBody)
-        .setPriority(NotificationCompat.PRIORITY_HIGH)
-        //for tap option
-        .setContentIntent(pendingIntent)
-        .setAutoCancel(true)
-        //add action button for direct reply
-        .addAction(action)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false)
+    notify(NOTIFICATION_ID, builder.build())
+
+    for (i in 1..20) {
+        runBlocking {
+            delay(200)
+        }
+        builder.setProgress(PROGRESS_MAX, 5*i, false)
+        notify(NOTIFICATION_ID, builder.build())
+    }
 
 
+    builder.setContentText("Download complete")
+        .setProgress(0, 0, false)
     notify(NOTIFICATION_ID, builder.build())
 
 }
