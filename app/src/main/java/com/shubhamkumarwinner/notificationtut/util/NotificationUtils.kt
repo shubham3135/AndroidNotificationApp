@@ -54,22 +54,30 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setSmallIcon(R.drawable.ic_electric_bike)
         .setContentTitle(title)
         .setContentText(messageBody)
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        //set system wide category for use in do not disturb mode
+//        .setCategory(NotificationCompat.CATEGORY_ALARM)
+//        .setCategory(NotificationCompat.CATEGORY_CALL)
+//        .setCategory(NotificationCompat.CATEGORY_EMAIL)
+//        .setCategory(NotificationCompat.CATEGORY_ERROR)
+//        .setCategory(NotificationCompat.CATEGORY_EVENT)
+//        .setCategory(NotificationCompat.CATEGORY_LOCATION_SHARING)
+//        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+//        .setCategory(NotificationCompat.CATEGORY_MISSED_CALL)
+//        .setCategory(NotificationCompat.CATEGORY_NAVIGATION)
+//        .setCategory(NotificationCompat.CATEGORY_PROGRESS)
+//        .setCategory(NotificationCompat.CATEGORY_PROMO)
+//        .setCategory(NotificationCompat.CATEGORY_RECOMMENDATION)
+//        .setCategory(NotificationCompat.CATEGORY_REMINDER)
+//        .setCategory(NotificationCompat.CATEGORY_SERVICE)
+//        .setCategory(NotificationCompat.CATEGORY_SOCIAL)
+//        .setCategory(NotificationCompat.CATEGORY_STATUS)
+//        .setCategory(NotificationCompat.CATEGORY_STOPWATCH)
+//        .setCategory(NotificationCompat.CATEGORY_SYSTEM)
+//        .setCategory(NotificationCompat.CATEGORY_TRANSPORT)
+        .setCategory(NotificationCompat.CATEGORY_WORKOUT)
 
-    builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false)
-    notify(NOTIFICATION_ID, builder.build())
 
-    for (i in 1..20) {
-        runBlocking {
-            delay(200)
-        }
-        builder.setProgress(PROGRESS_MAX, 5*i, false)
-        notify(NOTIFICATION_ID, builder.build())
-    }
-
-
-    builder.setContentText("Download complete")
-        .setProgress(0, 0, false)
     notify(NOTIFICATION_ID, builder.build())
 
 }
