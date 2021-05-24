@@ -55,7 +55,12 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setContentTitle(title)
         .setContentText(messageBody)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
+        // for showing urgent message like phone call
         .setFullScreenIntent(replyPendingIntent, true)
+        // for showing notification in lock screen
+//        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//        .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
+        .setVisibility(NotificationCompat.VISIBILITY_SECRET)
 
     runBlocking {
         delay(3000)
