@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import androidx.core.app.RemoteInput
 import com.shubhamkumarwinner.notificationtut.DomainActivity
 import com.shubhamkumarwinner.notificationtut.MainActivity
 import com.shubhamkumarwinner.notificationtut.R
@@ -12,6 +13,7 @@ import com.shubhamkumarwinner.notificationtut.R
 
 const val CHANNEL_ID = "myChannel"
 private const val NOTIFICATION_ID = 0
+const val KEY_TEXT_REPLY = "key_text_reply"
 
 fun NotificationManager.sendNotification(title: String, messageBody: String, applicationContext: Context){
     //for tap option
@@ -22,14 +24,26 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
     val pendingIntent: PendingIntent = PendingIntent.getActivity(
         applicationContext, 0, intent, 0)
 
-    // for adding action
-    val domainIntent = Intent(applicationContext, DomainActivity::class.java)
-    val domainPendingIntent: PendingIntent = PendingIntent.getActivity(
-        applicationContext,
-        0,
-        domainIntent,
-        PendingIntent.FLAG_ONE_SHOT
-    )
+    // for direct reply
+    val domainIntent = Intent(applicationContext, DomainActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+
+    val remoteInput: RemoteInput = RemoteInput.Builder(KEY_TEXT_REPLY).run {
+        setLabel("Reply")
+        build()
+    }
+    val replyPendingIntent: PendingIntent =
+        PendingIntent.getActivity(applicationContext,
+            0,
+            domainIntent,
+            PendingIntent.FLAG_ONE_SHOT)
+
+    val action: NotificationCompat.Action =
+        NotificationCompat.Action.Builder(R.drawable.ic_reply_icon,
+            "Reply", replyPendingIntent)
+            .addRemoteInput(remoteInput)
+            .build()
 
     val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_electric_bike)
@@ -39,10 +53,14 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         //for tap option
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
-        //add action button
-        .addAction(R.drawable.ic_electric_bike, "Domain", domainPendingIntent)
+        //add action button for direct reply
+        .addAction(action)
 
 
     notify(NOTIFICATION_ID, builder.build())
 
+}
+
+fun NotificationManager.cancelNotifications() {
+    cancelAll()
 }
