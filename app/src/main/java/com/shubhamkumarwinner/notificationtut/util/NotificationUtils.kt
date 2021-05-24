@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.shubhamkumarwinner.notificationtut.DomainActivity
 import com.shubhamkumarwinner.notificationtut.MainActivity
 import com.shubhamkumarwinner.notificationtut.R
 
@@ -21,6 +22,15 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
     val pendingIntent: PendingIntent = PendingIntent.getActivity(
         applicationContext, 0, intent, 0)
 
+    // for adding action
+    val domainIntent = Intent(applicationContext, DomainActivity::class.java)
+    val domainPendingIntent: PendingIntent = PendingIntent.getActivity(
+        applicationContext,
+        0,
+        domainIntent,
+        PendingIntent.FLAG_ONE_SHOT
+    )
+
     val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_electric_bike)
         .setContentTitle(title)
@@ -29,6 +39,8 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         //for tap option
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
+        //add action button
+        .addAction(R.drawable.ic_electric_bike, "Domain", domainPendingIntent)
 
 
     notify(NOTIFICATION_ID, builder.build())
