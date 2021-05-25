@@ -2,4 +2,5 @@
     <string name="app_name">NotificationTut</string>
     <string name="channel_name">ShubhamChannel</string>
     <string name="channel_description">This is for basic notification</string>
+    <string name="message_text">Apply NotificationCompat.InboxStyle to a notification if you want to add multiple short summary lines, such as snippets from incoming emails. This allows you to add multiple pieces of content text that are each truncated to one line, instead of one continuous line of text provided by NotificationCompat.BigTextStyle</string>
 </resources>

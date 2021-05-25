@@ -12,8 +12,8 @@ class DomainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityDomainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getImage()?.let {
-            binding.image.setImageResource(it)
+        getText()?.let {
+            binding.textView.text = it
         }
 
         val notificationManager = ContextCompat.getSystemService(
@@ -22,8 +22,8 @@ class DomainActivity : AppCompatActivity() {
         notificationManager.cancelNotifications()
     }
 
-    private fun getImage(): Int? {
-        return intent.getIntExtra("image", R.drawable.ic_electric_bike)
+    private fun getText(): String? {
+        return intent.getStringExtra("text")
     }
 
 }

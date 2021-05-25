@@ -17,7 +17,7 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
     //for tap option
     val imageIntent = Intent(applicationContext, DomainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-    }.putExtra("image", R.drawable.pic6)
+    }.putExtra("text", applicationContext.getString(R.string.message_text))
 
 
     val myBitmap = BitmapFactory.decodeResource(
@@ -35,12 +35,11 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
     val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_electric_bike)
         .setContentTitle(title)
-        .setContentText(messageBody)
+        .setContentText(applicationContext.getText(R.string.message_text))
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setLargeIcon(myBitmap)
-        .setStyle(NotificationCompat.BigPictureStyle()
-                .bigPicture(myBitmap)
-                .bigLargeIcon(null)
+        .setStyle(NotificationCompat.BigTextStyle()
+                .bigText(applicationContext.getString(R.string.message_text))
         )
         .setContentIntent(imagePendingIntent)
 
