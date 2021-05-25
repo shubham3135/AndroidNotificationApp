@@ -13,6 +13,7 @@ import com.shubhamkumarwinner.notificationtut.R
 
 const val CHANNEL_ID = "myChannel"
 private const val NOTIFICATION_ID = 0
+val GROUP_KEY_WORK_EMAIL = "com.shubhamkumarwinner.NotificationApp.WORK_EMAIL"
 
 fun NotificationManager.sendNotification(title: String, messageBody: String, applicationContext: Context){
     //for tap option
@@ -39,9 +40,15 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setContentText(messageBody)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setLargeIcon(myBitmap)
+        .setGroup(GROUP_KEY_WORK_EMAIL)
         .setContentIntent(notifyPendingIntent)
 
+
     notify(NOTIFICATION_ID, builder.build())
+    notify(1, builder.build())
+    notify(2, builder.build())
+    notify(3, builder.build())
+    notify(4, builder.build())
 
 }
 
