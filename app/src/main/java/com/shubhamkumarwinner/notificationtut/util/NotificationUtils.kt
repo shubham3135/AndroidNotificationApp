@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
-import androidx.core.app.TaskStackBuilder
 import com.shubhamkumarwinner.notificationtut.DomainActivity
 import com.shubhamkumarwinner.notificationtut.R
 
@@ -42,6 +41,10 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setLargeIcon(myBitmap)
         .setGroup(GROUP_KEY_WORK_EMAIL)
         .setContentIntent(notifyPendingIntent)
+        // show custom number in notification badges
+        .setNumber(20)
+        //setBadgeIcon type
+        .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
 
 
     // create different notification id for group notifications

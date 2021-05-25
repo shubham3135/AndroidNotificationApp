@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId, channelName, importance).apply {
                 description = descriptionText
+                //for hiding badges
+//                setShowBadge(false)
             }
             // Register the channel with the system
             val notificationManager: NotificationManager =
