@@ -32,16 +32,19 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
             PendingIntent.FLAG_UPDATE_CURRENT)
 
 
+    val message1 = NotificationCompat.MessagingStyle.Message(applicationContext.getString(R.string.channel_name), 1, "Shubham")
+    val message2 = NotificationCompat.MessagingStyle.Message(applicationContext.getString(R.string.channel_description), 2, "Rahul")
+
+
     val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_electric_bike)
         .setContentTitle(title)
         .setContentText(applicationContext.getText(R.string.message_text))
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setLargeIcon(myBitmap)
-        .setStyle(NotificationCompat.InboxStyle()
-                .addLine(applicationContext.getString(R.string.message_text))
-                .addLine(applicationContext.getString(R.string.channel_description))
-                .addLine(applicationContext.getString(R.string.channel_name))
+        .setStyle(NotificationCompat.MessagingStyle(applicationContext.getString(R.string.app_name))
+            .addMessage(message1)
+            .addMessage(message2)
         )
         .setContentIntent(imagePendingIntent)
 
