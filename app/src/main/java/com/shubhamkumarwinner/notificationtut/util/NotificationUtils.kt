@@ -44,6 +44,7 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setContentIntent(notifyPendingIntent)
 
 
+    // create different notification id for group notifications
     notify(NOTIFICATION_ID, builder.build())
     notify(1, builder.build())
     notify(2, builder.build())
