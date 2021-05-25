@@ -38,8 +38,10 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setContentText(applicationContext.getText(R.string.message_text))
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setLargeIcon(myBitmap)
-        .setStyle(NotificationCompat.BigTextStyle()
-                .bigText(applicationContext.getString(R.string.message_text))
+        .setStyle(NotificationCompat.InboxStyle()
+                .addLine(applicationContext.getString(R.string.message_text))
+                .addLine(applicationContext.getString(R.string.channel_description))
+                .addLine(applicationContext.getString(R.string.channel_name))
         )
         .setContentIntent(imagePendingIntent)
 
