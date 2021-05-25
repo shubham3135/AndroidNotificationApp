@@ -11,7 +11,9 @@
         android:theme="@style/Theme.NotificationTut">
         <activity
             android:name=".DomainActivity"
-            android:parentActivityName=".MainActivity" />
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

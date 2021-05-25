@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
 import com.shubhamkumarwinner.notificationtut.DomainActivity
-import com.shubhamkumarwinner.notificationtut.MainActivity
 import com.shubhamkumarwinner.notificationtut.R
 
 
@@ -18,6 +17,9 @@ private const val NOTIFICATION_ID = 0
 fun NotificationManager.sendNotification(title: String, messageBody: String, applicationContext: Context){
     //for tap option
     val resultIntent = Intent(applicationContext, DomainActivity::class.java)
+        .apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         .putExtra("text", applicationContext.getString(R.string.message_text))
 
 
@@ -26,14 +28,9 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         R.drawable.pic6
     )
 
-    // use TaskStackBuilder.crete for activity in backstack
-    val imagePendingIntent: PendingIntent? =
-        TaskStackBuilder.create(applicationContext).run {
-            // Add the intent, which inflates the back stack
-            addNextIntentWithParentStack(resultIntent)
-            // Get the PendingIntent containing the entire back stack
-            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-        }
+    val notifyPendingIntent = PendingIntent.getActivity(
+        applicationContext, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT
+    )
 
 
     val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -42,7 +39,7 @@ fun NotificationManager.sendNotification(title: String, messageBody: String, app
         .setContentText(messageBody)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setLargeIcon(myBitmap)
-        .setContentIntent(imagePendingIntent)
+        .setContentIntent(notifyPendingIntent)
 
     notify(NOTIFICATION_ID, builder.build())
 
