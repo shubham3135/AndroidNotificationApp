@@ -24,9 +24,5 @@ F
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-z
-Japp/src/main/java/com/shubhamkumarwinner/notificationtut/DomainActivity.kt,0\9\090ce0076e7020ff9db96daeadfb53ed9bd6d0f3
-x
-Happ/src/main/java/com/shubhamkumarwinner/notificationtut/MainActivity.kt,a\4\a46fcb16ac82721d885f70ac1dd30b83e7de46a7
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
